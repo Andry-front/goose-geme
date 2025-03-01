@@ -1,10 +1,7 @@
-import { UserProvider } from './context/UserContext';
-import UserProfile from './components/UserProfile/UserProfile';
+import AppProviders from './providers/AppProviders';
 
 const App = () => (
-    <UserProvider>
-        <UserProfile />
-    </UserProvider>
+    <AppProviders/>
 );
 
 export default App;

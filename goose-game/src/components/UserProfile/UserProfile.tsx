@@ -1,4 +1,4 @@
-import { useUser } from "../../context/UserContext";
+import { useUser } from './../../hooks/useUser';
 
 const UserProfile = () => {
     const { user, setUser } = useUser();
@@ -7,7 +7,8 @@ const UserProfile = () => {
         <div>
             <h1>{user ?
                 `Hello ${user.name}`:
-                'No user logged in'}</h1>
+                'No user logged in'}
+            </h1>
             <button onClick={() => setUser({ id: 1, name: 'John Doe' })}>Set User</button>
         </div>
     );

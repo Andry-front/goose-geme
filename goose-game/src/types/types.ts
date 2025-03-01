@@ -1,7 +1,22 @@
+import React from "react";
+
 export interface ExampleProps {
     title: string
 }
 
 export interface User {
-    user: User;
+    id: number;
+    name: string;
+}
+
+export interface UserContextType {
+    user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+    theme: Theme;
+    toggleTheme: () => void;
 }
