@@ -20,3 +20,20 @@ export interface ThemeContextType {
     theme: Theme;
     toggleTheme: () => void;
 }
+
+interface Figures {
+    id: number,
+    movesLeft: number,
+    position: number,
+    complete: boolean,
+}
+
+interface Player {
+    name: string,
+    figures: Figures[],
+    lastRolled: number,
+}
+
+export interface PlayersList {
+    players: Player[],
+}

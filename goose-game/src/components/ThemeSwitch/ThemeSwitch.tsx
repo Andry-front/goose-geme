@@ -1,21 +1,23 @@
 import { useTheme } from './../../hooks/useTheme';
-import UserProfile from './../UserProfile/UserProfile';
+import Menu from "../../pages/Menu/Menu";
+import styles from './ThemeSwitch.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const ThemeSwitch = () => {
     const { theme, toggleTheme } = useTheme();
 
-    const appStyle = {
-        backgroundColor: theme === 'light' ? '#fff' : '#333',
-        color: theme === 'light' ? '#000' : '#fff',
-        minHeight: '100vh',
-        width: '100%',
-        transition: 'background-color 0.3s, color 0.3s',
-    }
+    const className = cx({
+        'switch-box': true,
+        'light-theme': theme === 'light',
+        'dark-theme': theme === 'dark',
+    });
 
     return(
-        <div style={appStyle}>
+        <div className={className}>
             <button onClick={toggleTheme}>Переключить тему</button>
-            <UserProfile/>
+            <Menu/>
         </div>
     );
 };
