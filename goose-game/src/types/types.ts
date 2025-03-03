@@ -26,9 +26,16 @@ interface Figures {
     movesLeft: number,
     position: number,
     complete: boolean,
+    active: boolean,
 }
 
 interface Player {
+    name: string,
+    figures: Figures[],
+    lastRolled: number,
+}
+
+export interface PropsPlayerBox {
     name: string,
     figures: Figures[],
     lastRolled: number,

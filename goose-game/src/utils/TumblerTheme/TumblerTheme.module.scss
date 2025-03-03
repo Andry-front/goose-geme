@@ -1,0 +1,54 @@
+.tumbler-wrapper {
+  position: relative;
+  margin: 10px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 38px;
+  max-width: 50px;
+  height: 30px;
+  background-color: #000;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+  }
+
+  &:before {
+    left: 6px;
+    background: url('/src/assets/dark.svg');
+  }
+
+  &:after {
+    right: 6px;
+    background: url('/src/assets/light.svg');
+    z-index: 1;
+  }
+
+  &.light {
+    background-color: #333;
+  }
+
+  span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: .5s;
+    z-index: 2;
+  }
+
+  span.dark {
+    transform: translateX(calc(100% - 2px));
+  }
+}

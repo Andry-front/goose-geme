@@ -1,0 +1,14 @@
+.tracker-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .tracker-list {
+    margin: 10px;
+    padding: 10px;
+    border: solid 3px #888888;
+    border-radius: 15px;
+  }
+}
+
