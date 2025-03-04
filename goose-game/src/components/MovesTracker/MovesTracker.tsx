@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlayersList } from "../../types/types";
+import { PlayersList, Player, Figures } from "../../types/types";
 import { RandomInteger } from "../../utils/Functions";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import styles from './MovesTracker.module.scss';
@@ -22,19 +22,33 @@ const MovesTracker: React.FC<PlayersList> = ({ players }) => {
         const resultDice = RandomInteger(1, 6);
 
         const eventActiveFigure = (active: number, players: any) => {
-            console.log(active);
-            console.log(players[active]);
+            const addedActiveFigure = (figures: Figures[], index: number): Figures[] => {
+                figures[index].active = true;
+                return figures;
+            }
+
+            return players.map((item: Player, index: number) => {
+                if (index === active) {
+                    const indexNewActive =
+                        item.figures.findIndex((itemFigures) => !itemFigures.active);
+
+                    item.figures = indexNewActive >= 0 ?
+                        addedActiveFigure(item.figures, indexNewActive) :
+                        item.figures;
+                }
+
+                return item;
+            });
         }
 
         if (resultDice === 6) {
-            eventActiveFigure(playerActive, newPlayers);
+            setPlayersState(eventActiveFigure(playerActive, newPlayers));
         } else {
             setPlayerActive(activeNumber);
+            setPlayersState(newPlayers);
         }
 
         newPlayers[index].lastRolled = resultDice;
-
-        setPlayersState(newPlayers);
     };
 
 

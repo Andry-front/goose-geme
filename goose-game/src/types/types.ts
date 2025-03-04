@@ -21,7 +21,7 @@ export interface ThemeContextType {
     toggleTheme: () => void;
 }
 
-interface Figures {
+export interface Figures {
     id: number,
     movesLeft: number,
     position: number,
@@ -29,7 +29,7 @@ interface Figures {
     active: boolean,
 }
 
-interface Player {
+export interface Player {
     name: string,
     figures: Figures[],
     lastRolled: number,

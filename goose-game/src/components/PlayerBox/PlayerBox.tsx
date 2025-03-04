@@ -9,11 +9,15 @@ const PlayerBox: React.FC<PropsPlayerBox> = ({ name, figures, lastRolled }) => {
             <p>last rolled: {lastRolled}</p>
             <ul>
                 {figures.map((item, index) => (
-                    <li key={index}>
-                        <span>Moves left: {item.movesLeft}</span>
-                        <span>Position: {item.position}</span>
-                    </li>
-                ))}
+                     <li
+                         className={item.active ?
+                         styles['active']:
+                         ''}
+                         key={index}>
+                         <span>Moves left: {item.movesLeft}</span>
+                         <span>Position: {item.position}</span>
+                     </li>
+                    ))}
             </ul>
         </div>
     );
