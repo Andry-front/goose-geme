@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types.ts";
-import {RandomInteger} from "../../../utils/Functions.ts";
-import PlayerBox from "../../../components/PlayerBox/PlayerBox.tsx";
-import styles from './Game.module.scss';
-import EndGame from "../../../components/EndGame/EndGame.tsx";
+import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types";
+import {RandomInteger} from "../../../utils/Functions";
+import PlayerBox from "../../../components/PlayerBox/PlayerBox";
+import EndGame from "../../../components/EndGame/EndGame";
 import {initialStatePlayer} from "../../../data/InitialStatePlayer";
+import styles from './Game.module.scss';
 
 
 const Game: React.FC = ({}) => {
