@@ -1,9 +1,10 @@
 .player-wrapper {
 
   li {
+    border: 1px solid transparent;
 
     &.active {
-      border: 1px solid palevioletred;
+      border-color: palevioletred;
       cursor: pointer;
     }
 

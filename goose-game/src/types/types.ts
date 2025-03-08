@@ -22,8 +22,7 @@ export interface ThemeContextType {
 }
 
 export interface Figures {
-    id: number,
-    movesLeft: number,
+    totalMoves: number,
     position: number,
     complete: boolean,
     active: boolean,
@@ -39,8 +38,26 @@ export interface PropsPlayerBox {
     name: string,
     figures: Figures[],
     lastRolled: number,
+    moves: (indexFigures: number, lastShot: number) => void,
+    active: boolean,
+    moveFigures: boolean,
 }
 
 export interface PlayersList {
     players: Player[],
+}
+
+export interface StatePlayerActive {
+    active: number,
+    rollDice: boolean,
+    moveFigures: boolean,
+}
+
+export interface StateEndGame {
+    end: boolean,
+    winnerName: string,
+}
+
+export interface PropsEndGame {
+    nameWinner: string,
 }

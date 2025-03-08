@@ -10,5 +10,10 @@
     border: solid 3px #888888;
     border-radius: 15px;
   }
+
+  button.disabled {
+    pointer-events: none;
+    opacity: .3;
+  }
 }
 
