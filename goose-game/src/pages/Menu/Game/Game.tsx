@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import {Figures, Player, PlayersList, StatePlayerActive, StateEndGame} from "../../../types/types.ts";
+import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types.ts";
 import {RandomInteger} from "../../../utils/Functions.ts";
 import PlayerBox from "../../../components/PlayerBox/PlayerBox.tsx";
 import styles from './Game.module.scss';
-import EndGame from "./EndGame/EndGame.tsx";
-import {initialStatePlayer} from "../../../data/InitialStatePlayer.ts";
+import EndGame from "../../../components/EndGame/EndGame.tsx";
+import {initialStatePlayer} from "../../../data/InitialStatePlayer";
 
 
-const Game: React.FC<PlayersList> = ({ players }) => {
-    const [ playersState, setPlayersState] = useState(players);
+const Game: React.FC = ({}) => {
+    const [ playersState, setPlayersState] = useState(initialStatePlayer);
     const [endGame, setEndGame] = useState<StateEndGame>({end: false, winnerName: ''});
 
     const startPlayer: StatePlayerActive = {
-        active: RandomInteger(0, players.length - 1),
+        active: RandomInteger(0, playersState.length - 1),
         rollDice: true,
         moveFigures: false,
     }
