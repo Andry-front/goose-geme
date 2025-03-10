@@ -66,16 +66,14 @@ const Game: React.FC = ({}) => {
         });
     };
 
-    const isEnemyPieceCaptured = (playersList: Player[], indexFigures: number) => {
+    const isEnemyPieceCaptured = (playersList: Player[], lastMove: number) => {
         console.log(playersList);
-        console.log(indexFigures);
+        console.log(lastMove);
     };
 
     const callEndGame = (endPlayer: Player)=> {
         const figuresList = endPlayer.figures;
-        const result = figuresList[figuresList.length].complete;
-
-        result && console.log('RESULT end game', result);
+        const result = figuresList[figuresList.length -1].complete;
 
         setPlayersState(initialStatePlayer);
         setEndGame({end: result, winnerName: endPlayer.name});
@@ -137,7 +135,7 @@ const Game: React.FC = ({}) => {
             playerActive.active :
             nextPlayerActive(playerActive.active, playersState);
 
-        isEnemyPieceCaptured(newPlayers, indexFigures);
+        isEnemyPieceCaptured(newPlayers, newPlayers[playerActive.active].figures[indexFigures].position);
 
         setPlayersState(newPlayers);
 
