@@ -66,11 +66,14 @@ const Game: React.FC = ({}) => {
         });
     };
 
-    const callEndGame = (endPlayer: Player)=> {
-        let result = false;
-        const figuresList = endPlayer.figures;
+    const isEnemyPieceCaptured = (playersList: Player[], indexFigures: number) => {
+        console.log(playersList);
+        console.log(indexFigures);
+    };
 
-        result = figuresList[figuresList.length].complete;
+    const callEndGame = (endPlayer: Player)=> {
+        const figuresList = endPlayer.figures;
+        const result = figuresList[figuresList.length].complete;
 
         result && console.log('RESULT end game', result);
 
@@ -133,6 +136,8 @@ const Game: React.FC = ({}) => {
         const playerActiveNew = lastRolled === 6 ?
             playerActive.active :
             nextPlayerActive(playerActive.active, playersState);
+
+        isEnemyPieceCaptured(newPlayers, indexFigures);
 
         setPlayersState(newPlayers);
 
