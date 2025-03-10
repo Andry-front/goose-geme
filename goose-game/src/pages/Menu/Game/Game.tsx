@@ -70,9 +70,7 @@ const Game: React.FC = ({}) => {
         let result = false;
         const figuresList = endPlayer.figures;
 
-        figuresList.forEach((item: Figures) => {
-            result = item.complete;
-        });
+        result = figuresList[figuresList.length].complete;
 
         result && console.log('RESULT end game', result);
 
