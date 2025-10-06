@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types";
 import {RandomInteger} from "../../../utils/Functions";
 import PlayerBox from "../../../components/PlayerBox/PlayerBox";
@@ -73,7 +73,7 @@ const Game: React.FC = ({}) => {
 
     const callEndGame = (endPlayer: Player)=> {
         const figuresList = endPlayer.figures;
-        const result = figuresList[figuresList.length -1].complete;
+        const result = figuresList[figuresList.length -1].complete || true;
 
         setPlayersState(initialStatePlayer);
         setEndGame({end: result, winnerName: endPlayer.name});
@@ -147,6 +147,15 @@ const Game: React.FC = ({}) => {
 
         callEndGame(newPlayers[playerActive.active]);
     };
+
+    useEffect(() => {
+
+        setPlayersState(initialStatePlayer);
+
+        return () => {
+            setPlayersState(initialStatePlayer);
+        }
+    }, []);
 
     return(
         <>
