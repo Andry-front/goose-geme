@@ -3,6 +3,7 @@ import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/t
 import {RandomInteger} from "../../../utils/Functions";
 import PlayerBox from "../../../components/PlayerBox/PlayerBox";
 import EndGame from "../../../components/EndGame/EndGame";
+import ChessBoard from "../../../components/ChessBoard/ChessBoard.tsx";
 import {initialStatePlayer} from "../../../data/InitialStatePlayer";
 import styles from './Game.module.scss';
 
@@ -149,11 +150,39 @@ const Game: React.FC = ({}) => {
     };
 
     useEffect(() => {
-
-        setPlayersState(initialStatePlayer);
-
         return () => {
-            setPlayersState(initialStatePlayer);
+            setPlayersState([
+                {
+                    name: 'Olivia',
+                    figures: [
+                        {totalMoves: 32, position: 0, complete: false, active: false},
+                        {totalMoves: 31, position: 0, complete: false, active: false},
+                        {totalMoves: 30, position: 0, complete: false, active: false},
+                        {totalMoves: 29, position: 0, complete: false, active: false},
+                    ],
+                    lastRolled: 0,
+                },
+                {
+                    name: 'James',
+                    figures: [
+                        {totalMoves: 32, position: 0, complete: false, active: false},
+                        {totalMoves: 31, position: 0, complete: false, active: false},
+                        {totalMoves: 30, position: 0, complete: false, active: false},
+                        {totalMoves: 29, position: 0, complete: false, active: false},
+                    ],
+                    lastRolled: 0,
+                },
+                {
+                    name: 'Emma',
+                    figures: [
+                        {totalMoves: 32, position: 0, complete: false, active: false},
+                        {totalMoves: 31, position: 0, complete: false, active: false},
+                        {totalMoves: 30, position: 0, complete: false, active: false},
+                        {totalMoves: 29, position: 0, complete: false, active: false},
+                    ],
+                    lastRolled: 0,
+                },
+            ]);
         }
     }, []);
 
@@ -162,27 +191,30 @@ const Game: React.FC = ({}) => {
             {endGame.end ?
                 <EndGame nameWinner={endGame.winnerName} />
                 :
-                <div className={styles['tracker-wrapper']}>
-                    <>{playersState.map((item, index) => (
-                            <div className={styles['tracker-list']} key={index}>
-                                <PlayerBox
-                                    name={item.name}
-                                    figures={item.figures}
-                                    lastRolled={item.lastRolled}
-                                    moves={movesFigure}
-                                    active={index === playerActive.active}
-                                    moveFigures={playerActive.moveFigures}
-                                />
-                                <button
-                                    disabled={buttonRollDice(index)}
-                                    onClick={() => rollDice(index)}
-                                >Roll the dice
-                                </button>
-                            </div>
-                        )
-                    )}
-                    </>
-                </div>
+                <>
+                    <ChessBoard />
+                    <div className={styles['tracker-wrapper']}>
+                        <>{playersState.map((item, index) => (
+                                <div className={styles['tracker-list']} key={index}>
+                                    <PlayerBox
+                                        name={item.name}
+                                        figures={item.figures}
+                                        lastRolled={item.lastRolled}
+                                        moves={movesFigure}
+                                        active={index === playerActive.active}
+                                        moveFigures={playerActive.moveFigures}
+                                    />
+                                    <button
+                                        disabled={buttonRollDice(index)}
+                                        onClick={() => rollDice(index)}
+                                    >Roll the dice
+                                    </button>
+                                </div>
+                            )
+                        )}
+                        </>
+                    </div>
+                </>
             }
         </>
     );
