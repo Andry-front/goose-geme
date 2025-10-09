@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types";
 import {RandomInteger} from "../../../utils/Functions";
 import PlayerBox from "../../../components/PlayerBox/PlayerBox";
@@ -74,7 +74,7 @@ const Game: React.FC = ({}) => {
 
     const callEndGame = (endPlayer: Player)=> {
         const figuresList = endPlayer.figures;
-        const result = figuresList[figuresList.length -1].complete || true;
+        const result = figuresList[figuresList.length -1].complete;
 
         setPlayersState(initialStatePlayer);
         setEndGame({end: result, winnerName: endPlayer.name});
@@ -149,50 +149,17 @@ const Game: React.FC = ({}) => {
         callEndGame(newPlayers[playerActive.active]);
     };
 
-    useEffect(() => {
-        return () => {
-            setPlayersState([
-                {
-                    name: 'Olivia',
-                    figures: [
-                        {totalMoves: 32, position: 0, complete: false, active: false},
-                        {totalMoves: 31, position: 0, complete: false, active: false},
-                        {totalMoves: 30, position: 0, complete: false, active: false},
-                        {totalMoves: 29, position: 0, complete: false, active: false},
-                    ],
-                    lastRolled: 0,
-                },
-                {
-                    name: 'James',
-                    figures: [
-                        {totalMoves: 32, position: 0, complete: false, active: false},
-                        {totalMoves: 31, position: 0, complete: false, active: false},
-                        {totalMoves: 30, position: 0, complete: false, active: false},
-                        {totalMoves: 29, position: 0, complete: false, active: false},
-                    ],
-                    lastRolled: 0,
-                },
-                {
-                    name: 'Emma',
-                    figures: [
-                        {totalMoves: 32, position: 0, complete: false, active: false},
-                        {totalMoves: 31, position: 0, complete: false, active: false},
-                        {totalMoves: 30, position: 0, complete: false, active: false},
-                        {totalMoves: 29, position: 0, complete: false, active: false},
-                    ],
-                    lastRolled: 0,
-                },
-            ]);
-        }
-    }, []);
-
     return(
         <>
             {endGame.end ?
                 <EndGame nameWinner={endGame.winnerName} />
                 :
                 <>
-                    <ChessBoard />
+                    <ChessBoard
+                        activePlayer={playerActive.active}
+                        players={playersState}
+                    />
+
                     <div className={styles['tracker-wrapper']}>
                         <>{playersState.map((item, index) => (
                                 <div className={styles['tracker-list']} key={index}>
@@ -203,6 +170,7 @@ const Game: React.FC = ({}) => {
                                         moves={movesFigure}
                                         active={index === playerActive.active}
                                         moveFigures={playerActive.moveFigures}
+                                        color={item.color}
                                     />
                                     <button
                                         disabled={buttonRollDice(index)}

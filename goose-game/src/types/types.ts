@@ -32,6 +32,7 @@ export interface Player {
     name: string,
     figures: Figures[],
     lastRolled: number,
+    color: string,
 }
 
 export interface PropsPlayerBox {
@@ -41,10 +42,22 @@ export interface PropsPlayerBox {
     moves: (indexFigures: number, lastShot: number) => void,
     active: boolean,
     moveFigures: boolean,
+    color: string,
 }
 
 export interface PlayersList {
     players: Player[],
+}
+
+export interface PropsChessBoard {
+    activePlayer: number,
+    players: Player[],
+}
+
+export interface PropsIconGoose {
+    width: number,
+    height: number,
+    color?: string,
 }
 
 export interface StatePlayerActive {
