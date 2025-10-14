@@ -43,15 +43,23 @@ export interface PropsPlayerBox {
     active: boolean,
     moveFigures: boolean,
     color: string,
+    eventHoverFigure: (position: number, index: number, hover: boolean) => void,
 }
 
 export interface PlayersList {
     players: Player[],
 }
 
+export interface ActiveCell {
+    playerIndex: number,
+    figureIndex: number,
+}
+
 export interface PropsChessBoard {
     activePlayer: number,
     players: Player[],
+    hoverFigure: HoverFigure,
+    piceDelete: (activeCellList: ActiveCell[]) => void,
 }
 
 export interface PropsIconGoose {
@@ -64,6 +72,13 @@ export interface StatePlayerActive {
     active: number,
     rollDice: boolean,
     moveFigures: boolean,
+}
+
+export interface HoverFigure {
+    hover: boolean,
+    indexFigure: number,
+    position: number,
+    positionMove: number,
 }
 
 export interface StateEndGame {

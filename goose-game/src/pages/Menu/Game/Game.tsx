@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Figures, Player, StatePlayerActive, StateEndGame} from "../../../types/types";
+import {Figures, Player, StatePlayerActive, StateEndGame, HoverFigure, ActiveCell} from "../../../types/types";
 import {RandomInteger} from "../../../utils/Functions";
 import PlayerBox from "../../../components/PlayerBox/PlayerBox";
 import EndGame from "../../../components/EndGame/EndGame";
@@ -16,10 +16,20 @@ const Game: React.FC = ({}) => {
         active: RandomInteger(0, playersState.length - 1),
         rollDice: true,
         moveFigures: false,
-    }
+    };
+    const objHover: HoverFigure = {
+        hover: false,
+        indexFigure: 0,
+        position: 0,
+        positionMove: 0,
+    };
 
     const [ playerActive, setPlayerActive ] = useState<StatePlayerActive>(startPlayer);
+    const [ hoverFigure, setHoverFigure ] = useState<HoverFigure>(objHover);
 
+    const eventHoverFigure = (position: number, index: number, hover: boolean) => {
+        setHoverFigure({...hoverFigure, hover, position: position, indexFigure: index});
+    };
     const nextPlayerActive = (indexActive:number, players: Player[]) => {
         const nextPlayer = indexActive + 1;
 
@@ -48,7 +58,7 @@ const Game: React.FC = ({}) => {
 
     const startPositionCheck = (figuresList: Figures[])=> {
         return figuresList.findIndex((item: Figures)=> item.position === 1);
-    }
+    };
 
     const validateMoves = (diceResult: number, playersList: Player[], active: number) => {
         const check = (array: Figures[],  position: number, index: number)=> {
@@ -67,9 +77,38 @@ const Game: React.FC = ({}) => {
         });
     };
 
-    const isEnemyPieceCaptured = (playersList: Player[], lastMove: number) => {
-        console.log(playersList);
-        console.log(lastMove);
+    const piceDelete = (activeCellList: ActiveCell[]) => {
+        const previousMove = (active: number)=> {
+            if (active === 0) {
+                return playersState.length - 1;
+            } else {
+                return active - 1;
+            }
+        };
+
+        //@ts-ignore
+        const piceData: ActiveCell = activeCellList.find(item => {
+            return item.playerIndex !== previousMove(playerActive.active);
+        });
+        const newPlayer = [...playersState];
+
+        newPlayer[piceData.playerIndex].figures.forEach((item: Figures, index) => {
+           if (index === piceData?.figureIndex) {
+               item.active = false;
+               item.position = 0;
+           }
+        });
+    };
+
+    const fixPositionFigures = () => {
+
+        playersState.forEach((player: Player) => {
+
+            player.figures = [
+                ...player.figures.filter(item => item.position !== 0),
+                ...player.figures.filter(item => item.position === 0),
+            ];
+        })
     };
 
     const callEndGame = (endPlayer: Player)=> {
@@ -136,8 +175,6 @@ const Game: React.FC = ({}) => {
             playerActive.active :
             nextPlayerActive(playerActive.active, playersState);
 
-        isEnemyPieceCaptured(newPlayers, newPlayers[playerActive.active].figures[indexFigures].position);
-
         setPlayersState(newPlayers);
 
         setPlayerActive({...playerActive,
@@ -146,6 +183,7 @@ const Game: React.FC = ({}) => {
             active: playerActiveNew,
         });
 
+        fixPositionFigures();
         callEndGame(newPlayers[playerActive.active]);
     };
 
@@ -158,6 +196,9 @@ const Game: React.FC = ({}) => {
                     <ChessBoard
                         activePlayer={playerActive.active}
                         players={playersState}
+                        hoverFigure={hoverFigure}
+                        //@ts-ignore
+                        piceDelete={piceDelete}
                     />
 
                     <div className={styles['tracker-wrapper']}>
@@ -171,6 +212,7 @@ const Game: React.FC = ({}) => {
                                         active={index === playerActive.active}
                                         moveFigures={playerActive.moveFigures}
                                         color={item.color}
+                                        eventHoverFigure={eventHoverFigure}
                                     />
                                     <button
                                         disabled={buttonRollDice(index)}

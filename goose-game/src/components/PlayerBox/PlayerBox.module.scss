@@ -1,6 +1,11 @@
 .player-wrapper {
 
+  ul {
+    padding: 0;
+  }
+
   li {
+    list-style-type: none;
     border: 1px solid transparent;
 
     &.active {

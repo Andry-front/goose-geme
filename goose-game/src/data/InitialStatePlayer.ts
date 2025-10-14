@@ -2,9 +2,9 @@ export const initialStatePlayer = [
     {
         name: 'Olivia',
         figures: [
-            {totalMoves: 32, position: 4, complete: false, active: false},
-            {totalMoves: 31, position: 16, complete: false, active: false},
-            {totalMoves: 30, position: 20, complete: false, active: false},
+            {totalMoves: 32, position: 0, complete: false, active: false},
+            {totalMoves: 31, position: 0, complete: false, active: false},
+            {totalMoves: 30, position: 0, complete: false, active: false},
             {totalMoves: 29, position: 0, complete: false, active: false},
         ],
         lastRolled: 0,
