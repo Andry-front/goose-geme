@@ -21,6 +21,11 @@ export interface ThemeContextType {
     toggleTheme: () => void;
 }
 
+export interface DataPlayersContextType {
+    quantityPlayers: number,
+    getNumberPlayers: (quantity: number) => void;
+}
+
 export interface Figures {
     totalMoves: number,
     position: number,

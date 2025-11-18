@@ -197,7 +197,6 @@ const Game: React.FC = ({}) => {
                         activePlayer={playerActive.active}
                         players={playersState}
                         hoverFigure={hoverFigure}
-                        //@ts-ignore
                         piceDelete={piceDelete}
                     />
 

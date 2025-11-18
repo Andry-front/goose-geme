@@ -16,7 +16,6 @@ const ThemeSwitch = () => {
         'dark-theme': theme === 'dark',
     });
 
-
     return(
         <div className={classNameWrapper}>
             <TumblerTheme/>

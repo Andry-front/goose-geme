@@ -5,6 +5,10 @@ import {Link} from "react-router-dom";
 const Menu: React.FC = () => {
     return(
         <div className={styles['menu-box']}>
+            <Link to="/select-players">
+                <button>SelectPlayers</button>
+            </Link>
+
             <Link to='/game'>
                 <button>Play</button>
             </Link>
